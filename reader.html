@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>DSVB | Reader</title>
+<link rel="stylesheet" href="assets/site.css">
+<script src="assets/dsvb-logo.js" defer></script>
+</head><body><div class="w">
+<div class="top"><a class="back" href="./">All texts</a><dsvb-logo size="64" align="right" static></dsvb-logo></div>
+<h1 id="title">Loading…</h1>
+<p class="lede" id="by"></p>
+
+<div id="setup">
+ <h2>Pick a model</h2>
+ <p class="mu">Bigger models answer better but take longer to download and need a stronger device.</p>
+ <label class="opt"><input type="radio" name="m" value="Llama-3.2-1B-Instruct-q4f16_1-MLC"> Light, 0.7 GB <i data-s></i></label>
+ <label class="opt"><input type="radio" name="m" value="Qwen2.5-1.5B-Instruct-q4f16_1-MLC" checked> Standard, 1 GB, good for most phones <i data-s></i></label>
+ <label class="opt"><input type="radio" name="m" value="Llama-3.2-3B-Instruct-q4f16_1-MLC"> Sharper, 2 GB <i data-s></i></label>
+ <label class="opt"><input type="radio" name="m" value="Qwen2.5-7B-Instruct-q4f16_1-MLC"> Best, 5 GB, computers only <i data-s></i></label>
+ <p><button class="btn" id="go" disabled>Start</button> <button class="btn l" id="plain" disabled>Search without AI</button></p>
+ <div class="bar" id="bar"><div id="fill"></div></div>
+ <p class="mu" id="ps"></p>
+ <div id="prob"><b>The model did not start.</b> <span id="why"></span></div>
+ <details><summary>Trouble, or want to use your own text?</summary>
+  <p class="mu">If the model will not load, try the Light option, use Chrome or Edge, or tap Search without AI to see the closest passages. You can also ask about your own text file (.txt or .md) instead of this book.</p>
+  <p><input type="file" id="own" accept=".txt,.md,text/plain"></p>
+ </details>
+</div>
+
+<div id="log"></div>
+</div>
+<div class="w" id="ask"><input id="q" placeholder="Ask a question" autocomplete="off"><button class="btn" id="send">Ask</button></div>
+<script type="module" src="assets/reader.js"></script>
+</body></html>
