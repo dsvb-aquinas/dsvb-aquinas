@@ -1,33 +1,40 @@
 <!DOCTYPE html>
 <html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>DSVB | Reader</title>
+<title>DSVB | Study buddy</title>
 <link rel="stylesheet" href="assets/site.css">
-<script src="assets/dsvb-logo.js" defer></script>
+<script src="assets/dsvb-logo-loop.js" defer></script>
 </head><body><div class="w">
-<div class="top"><a class="back" href="./">All texts</a><dsvb-logo size="64" align="right" static></dsvb-logo></div>
-<h1 id="title">Loading…</h1>
-<p class="lede" id="by"></p>
+<div class="top"><a href="./">← All texts</a><dsvb-logo-loop size="56" fps="30" disappear-at="12" cooldown="1" align="right"></dsvb-logo-loop></div>
+<h1 id="title">Loading…</h1><p class="lede" id="by"></p>
 
 <div id="setup">
- <h2>Pick a model</h2>
- <p class="mu">Bigger models answer better but take longer to download and need a stronger device.</p>
- <label class="opt"><input type="radio" name="m" value="Llama-3.2-1B-Instruct-q4f16_1-MLC"> Light, 0.7 GB <i data-s></i></label>
- <label class="opt"><input type="radio" name="m" value="Qwen2.5-1.5B-Instruct-q4f16_1-MLC" checked> Standard, 1 GB, good for most phones <i data-s></i></label>
- <label class="opt"><input type="radio" name="m" value="Llama-3.2-3B-Instruct-q4f16_1-MLC"> Sharper, 2 GB <i data-s></i></label>
- <label class="opt"><input type="radio" name="m" value="Qwen2.5-7B-Instruct-q4f16_1-MLC"> Best, 5 GB, computers only <i data-s></i></label>
- <p><button class="btn" id="go" disabled>Start</button> <button class="btn l" id="plain" disabled>Search without AI</button></p>
- <div class="bar" id="bar"><div id="fill"></div></div>
- <p class="mu" id="ps"></p>
- <div id="prob"><b>The model did not start.</b> <span id="why"></span></div>
- <details><summary>Trouble, or want to use your own text?</summary>
-  <p class="mu">If the model will not load, try the Light option, use Chrome or Edge, or tap Search without AI to see the closest passages. You can also ask about your own text file (.txt or .md) instead of this book.</p>
-  <p><input type="file" id="own" accept=".txt,.md,text/plain"></p>
- </details>
+ <div class="card" id="onCard"><h3>Online <span class="mu">(recommended)</span></h3>
+  <p class="mu">Works on any phone or laptop. Nothing to download. Needs internet.</p>
+  <button class="btn full" id="online" disabled>Start</button></div>
+ <div class="card"><h3>Offline</h3>
+  <p class="mu">Download a small AI once, then use it with no internet. Needs a recent Chrome or Edge. Slower and less accurate than Online.</p>
+  <details id="offBox"><summary>Choose a model</summary>
+   <label class="opt"><input type="radio" name="m" value="Llama-3.2-1B-Instruct-q4f16_1-MLC"> Light, 0.7 GB <i data-s></i></label>
+   <label class="opt"><input type="radio" name="m" value="Qwen2.5-1.5B-Instruct-q4f16_1-MLC" checked> Standard, 1 GB <i data-s></i></label>
+   <label class="opt"><input type="radio" name="m" value="Llama-3.2-3B-Instruct-q4f16_1-MLC"> Sharper, 2 GB <i data-s></i></label>
+   <label class="opt"><input type="radio" name="m" value="Qwen2.5-7B-Instruct-q4f16_1-MLC"> Best, 5 GB, computers only <i data-s></i></label>
+   <p><button class="btn l full" id="off" disabled>Download and start</button></p>
+  </details>
+  <div class="prog" id="bar"><div id="fill"></div></div><p class="mu" id="ps"></p>
+  <div id="prob"></div></div>
+ <p style="text-align:center"><button class="btn l" id="plain" disabled>Just search the text (no AI)</button></p>
+ <details><summary>Use your own text file</summary><p class="mu">Pick a .txt or .md file and ask questions about it.</p><input type="file" id="own" accept=".txt,.md,text/plain"></details>
+ <footer><dsvb-logo-footer-loop size="150" fps="30" align="left"></dsvb-logo-footer-loop></footer>
 </div>
 
-<div id="log"></div>
+<div id="chat"><div id="log"></div></div>
 </div>
-<div class="w" id="ask"><input id="q" placeholder="Ask a question" autocomplete="off"><button class="btn" id="send">Ask</button></div>
+<div id="ask"><div class="in">
+ <div class="seg" id="chips"></div>
+ <div class="seg" id="modes"><button class="chip" data-m="short">Short</button><button class="chip on" data-m="normal">Normal</button><button class="chip" data-m="simple">Simple words</button><button class="chip" id="chg">Change mode</button></div>
+ <div class="send"><input id="q" placeholder="Ask anything about the book…" autocomplete="off" enterkeyhint="send"><button class="btn" id="send">Ask</button></div>
+</div></div>
+<script src="assets/dsvb-logo-footer-loop.js" defer></script>
 <script type="module" src="assets/reader.js"></script>
 </body></html>

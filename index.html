@@ -1,36 +1,24 @@
 <!DOCTYPE html>
 <html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>DSVB | Study with AI, fully offline</title>
-<meta name="description" content="Ask questions about set texts and get answers backed by quotes. Runs on your own device.">
+<title>DSVB | Study with AI</title>
+<meta name="description" content="Ask questions about set texts and get friendly answers backed by checked quotes.">
 <link rel="stylesheet" href="assets/site.css">
-<script src="assets/dsvb-logo.js" defer></script>
-<script src="assets/dsvb-logo-footer.js" defer></script>
+<script src="assets/dsvb-logo-loop.js" defer></script>
+<script src="assets/dsvb-logo-footer-loop.js" defer></script>
 </head><body><div class="w">
-<div class="top"><dsvb-logo size="84" align="left" once="header"></dsvb-logo></div>
-
-<h1>Study with AI, fully offline.</h1>
-<p class="lede">Pick a text and ask it questions. Every answer comes with quotes from the book, checked against the real words on the page. After one download it runs on your own phone or laptop, with no account and no internet.</p>
-
-<h2>Texts</h2>
-<div id="list"><p class="mu">Loading…</p></div>
-
+<div class="top"><dsvb-logo-loop size="76" fps="30" disappear-at="12" cooldown="1" align="left"></dsvb-logo-loop></div>
+<h1>Study with a friendly AI.</h1>
+<p class="lede">Pick a text and ask it anything. Answers come with quotes from the book, checked against the real words on the page. Use it online on any device, or download a model and use it offline.</p>
+<h2>Texts</h2><div id="list"><p class="mu">Loading…</p></div>
 <h2>How it works</h2>
-<ol>
-<li>Open a text.</li>
-<li>Download the small AI model once. It stays on your device.</li>
-<li>Ask anything. Switch your wifi off if you like, it still works.</li>
-</ol>
-
-<footer>
-<p>Made by DSVB. BEd (Hons) English. More texts are added over time.</p>
-<dsvb-logo-footer size="150" align="left"></dsvb-logo-footer>
-</footer>
+<ol><li>Open a text.</li><li>Choose <b>Online</b> (easiest) or <b>Offline</b> (download once).</li><li>Ask in your own words. Need it shorter or simpler? Tap a button.</li></ol>
+<footer><p>Made by DSVB. BEd (Hons) English. More texts are added over time.</p>
+<dsvb-logo-footer-loop size="150" fps="30" align="left"></dsvb-logo-footer-loop></footer>
 </div>
 <script>
 fetch("books/books.json").then(r=>r.json()).then(b=>{
-  document.getElementById("list").innerHTML=b.map((x,i)=>
-   `<a class="row" href="reader.html?b=${encodeURIComponent(x.id)}"><span>${String(i+1).padStart(2,"0")}</span><span><b>${x.title}</b><small>${x.author}</small></span><em>${x.year||""}</em></a>`).join("")||"<p class='mu'>Nothing here yet.</p>";
-}).catch(()=>{document.getElementById("list").innerHTML="<p class='mu'>Could not load the list. Open this page from the website link, not from a file on your computer.</p>"});
+ document.getElementById("list").innerHTML=b.map(x=>`<a class="row" href="reader.html?b=${encodeURIComponent(x.id)}"><span><b>${x.title}</b><small>${x.author}</small></span><em>${x.year||""}</em></a>`).join("")||"<p class='mu'>Nothing here yet.</p>"
+}).catch(()=>{document.getElementById("list").innerHTML="<p class='mu'>Could not load the list. Open this page from the website link, not from a file.</p>"});
 if("serviceWorker" in navigator)navigator.serviceWorker.register("sw.js").catch(()=>{});
 </script></body></html>
