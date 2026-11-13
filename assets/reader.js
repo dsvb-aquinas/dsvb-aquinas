@@ -49,15 +49,15 @@ function search(X, q, k) {
     .filter(x => x.s > 0).sort((a, b) => b.s - a.s).slice(0, k).map(x => x.c)
 }
 function found(q) {
-  const n = norm(q.replace(/\.\.\.|…/g, " ")); if (bookN.includes(n)) return true;
-  const w = n.split(" "); if (w.length < 4) return false; let h = 0, t = 0;
-  for (let i = 0; i < w.length - 2; i++) { t++; if (tri.has(w[i] + " " + w[i + 1] + " " + w[i + 2])) h++ }
-  return h / t >= .8
+  const ps = q.split(/\.\.\.|…/).map(norm).filter(Boolean); if (!ps.length) return false;
+  return ps.every(n => { if (bookN.includes(n)) return true; const w = n.split(" "); if (w.length < 4) return false; let h = 0, t = 0;
+    for (let i = 0; i < w.length - 2; i++) { t++; if (tri.has(w[i] + " " + w[i + 1] + " " + w[i + 2])) h++ } return h / t >= .8 })
 }
+const clean = t => t.replace(/(“[^”]*”|"[^"]*")|\s*[—–]\s*/g, (m, q) => q || ", ");
 function verify(txt) {
   let n = 0, bad = 0;
-  const html = esc(txt).replace(/(?:"|“)([^"”]{25,}?)(?:"|”)/g, (m, q) => { const ok = found(q); n++; if (!ok) bad++; return ok ? `<mark>“${q}”</mark>` : `<s>“${q}”</s>` });
-  return { html: html.replace(/\*\*(.+?)\*\*/g, "<b>$1</b>").replace(/\n/g, "<br>"), n, bad }
+  const html = esc(clean(txt)).replace(/(?:"|“)([^"”]{25,}?)(?:"|”)/g, (m, q) => { const ok = found(q); n++; if (!ok) bad++; return ok ? `<mark>“${q}”</mark>` : `<span class="uq">“${q}”</span>` });
+  return { html: html.replace(/\*\*(.+?)\*\*/g, "<b>$1</b>").replace(/\*([^*\n]+)\*/g, "<i>$1</i>").replace(/\n/g, "<br>"), n, bad }
 }
 function add(c, h) { const d = document.createElement("div"); d.className = c; d.innerHTML = h; $("#log").append(d); d.scrollIntoView({ block: "end", behavior: "smooth" }); return d }
 const dots = '<span class="dots"><i></i><i></i><i></i></span>';
@@ -71,7 +71,7 @@ function openChat(msg) {
 function passagesHtml(hits) { return hits.length ? `<details><summary>Passages used</summary>${hits.map(h => `<p><b>${h.label}:</b> ${esc(h.text)}</p>`).join("")}</details>` : "" }
 function render(box, ans, hits, q, mode, ck) {
   const v = verify(ans);
-  box.innerHTML = `<div class="t">${v.html}</div>` + (v.n ? `<div class="note">${v.n - v.bad} of ${v.n} quotes checked against the book${v.bad ? ". Crossed-out quotes were not found, so please don't use them." : " ✓"}</div>` : "") +
+  box.innerHTML = `<div class="t">${v.html}</div>` + (v.n ? `<div class="note">${v.n - v.bad} of ${v.n} quotes checked against the book${v.bad ? ". Quotes with a dotted line could not be matched exactly in the book, so double-check them before using them." : " ✓"}</div>` : "") +
     `<div class="acts"><button data-a="retry">↻ Try again</button><button data-a="simple">Explain simpler</button></div>` + passagesHtml(hits);
   box.dataset.q = q; box.dataset.mode = mode; box._ans = ans;
   if (ck) { if (v.n > 0 && v.bad === 0) LS.set(ck, ans); else LS.del(ck) }   // only keep answers whose quotes were all real
