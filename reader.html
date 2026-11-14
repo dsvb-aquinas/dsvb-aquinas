@@ -13,12 +13,20 @@
   <p class="mu">Works on any phone or laptop. Nothing to download. Needs internet.</p>
   <button class="btn full" id="online" disabled>Start</button></div>
  <div class="card"><h3>Offline</h3>
-  <p class="mu">Download a small AI once, then use it with no internet. Needs a recent Chrome or Edge. Slower and less accurate than Online.</p>
-  <details id="offBox"><summary>Choose a model</summary>
-   <label class="opt"><input type="radio" name="m" value="Llama-3.2-1B-Instruct-q4f16_1-MLC"> Light, 0.7 GB <i data-s></i></label>
-   <label class="opt"><input type="radio" name="m" value="Qwen2.5-1.5B-Instruct-q4f16_1-MLC" checked> Standard, 1 GB <i data-s></i></label>
-   <label class="opt"><input type="radio" name="m" value="Llama-3.2-3B-Instruct-q4f16_1-MLC"> Sharper, 2 GB <i data-s></i></label>
-   <label class="opt"><input type="radio" name="m" value="Qwen2.5-7B-Instruct-q4f16_1-MLC"> Best, 5 GB, computers only <i data-s></i></label>
+  <p class="mu">Download a small AI once, then use it with no internet. Slower and less detailed than Online. Pick how it should run:</p>
+  <details id="offBox"><summary>Choose how to run it</summary>
+   <div class="seg" id="eng"><button class="chip on" data-e="gpu">Fast (GPU)</button><button class="chip" data-e="cpu">Any device (CPU)</button></div>
+   <p class="mu" id="engNote"></p>
+   <div id="gpuList">
+    <label class="opt"><input type="radio" name="m" value="Llama-3.2-1B-Instruct-q4f16_1-MLC"> Light, 0.7 GB <i data-s></i></label>
+    <label class="opt"><input type="radio" name="m" value="Qwen2.5-1.5B-Instruct-q4f16_1-MLC" checked> Standard, 1 GB <i data-s></i></label>
+    <label class="opt"><input type="radio" name="m" value="Llama-3.2-3B-Instruct-q4f16_1-MLC"> Sharper, 2 GB <i data-s></i></label>
+    <label class="opt"><input type="radio" name="m" value="Qwen2.5-7B-Instruct-q4f16_1-MLC"> Best, 5 GB, computers only <i data-s></i></label>
+   </div>
+   <div id="cpuList" style="display:none">
+    <label class="opt"><input type="radio" name="c" value="Qwen/Qwen2.5-0.5B-Instruct-GGUF|qwen2.5-0.5b-instruct-q4_k_m.gguf" checked> Tiny, 0.4 GB, fastest <i></i></label>
+    <label class="opt"><input type="radio" name="c" value="Qwen/Qwen2.5-1.5B-Instruct-GGUF|qwen2.5-1.5b-instruct-q4_k_m.gguf"> Standard, 1 GB, slower but better <i></i></label>
+   </div>
    <p><button class="btn l full" id="off" disabled>Download and start</button></p>
   </details>
   <div class="prog" id="bar"><div id="fill"></div></div><p class="mu" id="ps"></p>
@@ -32,7 +40,7 @@
 </div>
 <div id="ask"><div class="in">
  <div class="seg" id="chips"></div>
- <div class="seg" id="modes"><button class="chip" data-m="short">Short</button><button class="chip on" data-m="normal">Normal</button><button class="chip" data-m="simple">Simple words</button><button class="chip" id="chg">Change mode</button></div>
+ <div class="seg" id="modes"><button class="chip" data-m="short">Short</button><button class="chip on" data-m="normal">Normal</button><button class="chip" data-m="simple">Simple</button><button class="chip" id="chg">⟲ Mode</button></div>
  <div class="send"><input id="q" placeholder="Ask anything about the book…" autocomplete="off" enterkeyhint="send"><button class="btn" id="send">Ask</button></div>
 </div></div>
 <script src="assets/dsvb-logo-footer-loop.js" defer></script>
