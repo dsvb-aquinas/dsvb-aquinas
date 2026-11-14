@@ -25,11 +25,11 @@ details summary{cursor:pointer;font-weight:600;padding:8px 0}
 footer{margin:48px 0 32px;border-top:1px solid var(--ln);padding-top:20px;color:var(--mu);font-size:14px}
 ol{padding-left:1.3em}ol li{margin:8px 0}
 /* chat */
-#chat{display:none;padding:12px 0 190px}
+#chat{display:none;padding:12px 0 150px}
 .u,.a{max-width:92%;padding:12px 15px;border-radius:20px;margin:10px 0;word-wrap:break-word;overflow-wrap:anywhere}
 .u{background:var(--ac);color:#fff;font-weight:500;margin-left:auto;border-bottom-right-radius:6px}
-.a{background:var(--card);border:1px solid var(--ln);border-bottom-left-radius:6px;box-shadow:var(--sh);font-size:16.5px}
-.a .t{line-height:1.6}mark{background:var(--hl);color:inherit;border-radius:4px;padding:0 3px}.uq{border-bottom:2px dotted var(--warn)}
+.a{background:none;border:0;border-radius:0;box-shadow:none;max-width:100%;padding:6px 2px 18px;font-size:17px;line-height:1.7}
+.a .t p{margin:0 0 12px}.a .t ul{margin:0 0 12px;padding-left:20px}.a .t li{margin:0 0 8px}.a .t>:last-child{margin-bottom:0}mark{background:color-mix(in srgb,var(--hl) 60%,transparent);color:inherit;border-radius:4px;padding:1px 4px;-webkit-box-decoration-break:clone;box-decoration-break:clone}.uq{border-bottom:2px dotted var(--warn)}
 .note{font-size:13px;color:var(--mu);margin-top:8px}
 .acts{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
 .acts button,.chip{background:var(--card);border:1px solid var(--ln);color:var(--ink);font-weight:600;border-radius:999px;padding:8px 14px;font:inherit;font-size:14px;cursor:pointer;min-height:38px}
@@ -44,4 +44,11 @@ ol{padding-left:1.3em}ol li{margin:8px 0}
 #q{flex:1;min-width:0;background:var(--card);color:var(--ink);border:1px solid var(--ln);border-radius:999px;padding:12px 18px;font:inherit;font-size:16px;min-height:48px}
 #q:focus{outline:2px solid var(--ac);border-color:transparent}
 #ask{box-shadow:0 -6px 20px rgba(0,0,0,.08)}.send .btn{border-radius:999px;padding:0 22px}
-@media(min-width:700px){.a,.u{max-width:80%}}
+.u{max-width:88%}@media(min-width:700px){.u{max-width:75%}}#eng{margin:6px 0}
+
+.a+.u,.u+.a{margin-top:14px}.a .note{margin-top:10px}.a details summary{font-size:14px;color:var(--mu);font-weight:600}
+.u{font-size:16.5px;line-height:1.5}
+
+#ask .seg button{padding:5px 12px;min-height:34px;font-size:14px}#ask .seg{margin-bottom:6px}
+#q{min-height:46px}.send .btn{min-height:46px}
+.a{line-height:1.65}
